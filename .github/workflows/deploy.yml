@@ -37,11 +37,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME_LOWER=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Build Docker image
-        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest ./user-app
+        run: docker build -t ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest ./user-app
 
       - name: Push Docker image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest
 
       - name: Verify image
-        run: echo "✅ Image pushed to ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest"
+        run: echo "✅ Image pushed to ${{ env.REGISTRY }}/${{ env.IMAGE_NAME_LOWER }}:latest"
