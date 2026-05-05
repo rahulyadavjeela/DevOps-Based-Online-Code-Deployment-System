@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Heroku-Lite: A DevOps-Based Online Code Deployment System with automated CI/CD pipeline and Docker containerization." />
+  <title>Heroku-Lite | Deployment Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ─── Header ──────────────────────────────────────── -->
+  <header class="header">
+    <div class="header-content">
+      <div class="logo">
+        <div class="logo-icon">⬡</div>
+        <h1>Heroku-Lite</h1>
+      </div>
+      <p class="tagline">DevOps-Based Online Code Deployment System</p>
+      <div class="header-status" id="headerStatus">
+        <span class="status-dot"></span>
+        <span class="status-text">Checking...</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <!-- ─── Deploy Section ─────────────────────────────── -->
+    <section class="section" id="deploySection">
+      <h2 class="section-title">
+        <span class="section-icon">🚀</span>
+        Deploy Application
+      </h2>
+
+      <!-- Deploy Tabs -->
+      <div class="deploy-tabs">
+        <button class="tab-btn active" data-tab="builtin" id="tabBuiltin">Built-in App</button>
+        <button class="tab-btn" data-tab="github" id="tabGithub">GitHub Repo</button>
+        <button class="tab-btn" data-tab="upload" id="tabUpload">Upload ZIP</button>
+      </div>
+
+      <!-- Built-in Deploy -->
+      <div class="tab-content active" id="builtinTab">
+        <div class="deploy-card">
+          <div class="deploy-info">
+            <h3>Deploy Sample Application</h3>
+            <p>Deploy the built-in sample Node.js application. This will build a Docker image and run it in a container.</p>
+          </div>
+          <button class="btn btn-primary btn-deploy" id="btnDeploy" onclick="deployBuiltin()">
+            <span class="btn-icon">▶</span>
+            Deploy Now
+          </button>
+        </div>
+      </div>
+
+      <!-- GitHub Deploy -->
+      <div class="tab-content" id="githubTab">
+        <div class="deploy-card">
+          <div class="deploy-info">
+            <h3>Deploy from GitHub</h3>
+            <p>Provide a public GitHub repository URL. The system will clone, build, and deploy automatically.</p>
+          </div>
+          <div class="input-group">
+            <input type="text" id="repoUrl" class="input" placeholder="https://github.com/user/repo" />
+            <button class="btn btn-primary btn-deploy" id="btnDeployGithub" onclick="deployGithub()">
+              <span class="btn-icon">▶</span>
+              Deploy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Deploy -->
+      <div class="tab-content" id="uploadTab">
+        <div class="deploy-card">
+          <div class="deploy-info">
+            <h3>Deploy from ZIP File</h3>
+            <p>Upload a ZIP file containing your application code. Must include a package.json file.</p>
+          </div>
+          <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">📁</div>
+            <p>Drag & drop your ZIP file here, or click to browse</p>
+            <input type="file" id="fileInput" accept=".zip" hidden />
+            <span class="upload-hint" id="uploadFileName">No file selected</span>
+          </div>
+          <button class="btn btn-primary btn-deploy" id="btnDeployUpload" onclick="deployUpload()" disabled>
+            <span class="btn-icon">▶</span>
+            Deploy ZIP
+          </button>
+        </div>
+      </div>
+
+      <!-- Deploy Progress -->
+      <div class="progress-bar" id="progressBar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="deploy-result" id="deployResult"></div>
+    </section>
+
+    <!-- ─── Status & Controls ──────────────────────────── -->
+    <section class="section" id="statusSection">
+      <h2 class="section-title">
+        <span class="section-icon">📊</span>
+        Deployment Status
+      </h2>
+
+      <div class="status-grid">
+        <div class="status-card" id="statusCard">
+          <div class="status-header">
+            <span class="status-badge" id="statusBadge">Unknown</span>
+            <button class="btn btn-ghost btn-sm" onclick="refreshStatus()">↻ Refresh</button>
+          </div>
+          <div class="status-details">
+            <div class="detail-row">
+              <span class="detail-label">Container</span>
+              <span class="detail-value" id="containerName">—</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">Started At</span>
+              <span class="detail-value" id="startedAt">—</span>
+            </div>
+            <div class="detail-row">
+              <span class="detail-label">App URL</span>
+              <a class="detail-value detail-link" id="appUrl" href="#" target="_blank">—</a>
+            </div>
+          </div>
+          <div class="status-actions">
+            <button class="btn btn-warning" id="btnStop" onclick="stopContainer()">⏹ Stop</button>
+            <button class="btn btn-info" id="btnRestart" onclick="restartContainer()">🔄 Restart</button>
+          </div>
+        </div>
+
+        <!-- Backend Health -->
+        <div class="status-card health-card">
+          <h3>Backend Health</h3>
+          <div class="detail-row">
+            <span class="detail-label">API Server</span>
+            <span class="detail-value" id="apiHealth">Checking...</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Uptime</span>
+            <span class="detail-value" id="apiUptime">—</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── Logs Section ───────────────────────────────── -->
+    <section class="section" id="logsSection">
+      <h2 class="section-title">
+        <span class="section-icon">📋</span>
+        Container Logs
+        <button class="btn btn-ghost btn-sm" onclick="refreshLogs()">↻ Refresh</button>
+      </h2>
+      <div class="logs-container">
+        <pre class="logs-output" id="logsOutput">Click "Refresh" to load container logs...</pre>
+      </div>
+    </section>
+
+    <!-- ─── History Section ────────────────────────────── -->
+    <section class="section" id="historySection">
+      <h2 class="section-title">
+        <span class="section-icon">📜</span>
+        Deployment History
+      </h2>
+      <div class="table-wrapper">
+        <table class="history-table">
+          <thead>
+            <tr>
+              <th>Time</th>
+              <th>Source</th>
+              <th>Status</th>
+              <th>Duration</th>
+              <th>Container ID</th>
+            </tr>
+          </thead>
+          <tbody id="historyBody">
+            <tr><td colspan="5" class="empty-state">No deployments yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── Footer ──────────────────────────────────────── -->
+  <footer class="footer">
+    <p>Heroku-Lite &mdash; DevOps-Based Online Code Deployment System</p>
+    <p class="footer-tech">Node.js &bull; Docker &bull; GitHub Actions &bull; CI/CD</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+[
+  {
+    "id": 1778001406878,
+    "source": "https://github.com/johnpapa/node-hello",
+    "status": "success",
+    "containerId": "d965abd29ab9",
+    "url": "http://localhost:3001",
+    "duration": "8.0s",
+    "timestamp": "2026-05-05T17:16:46.878Z"
+  },
+  {
+    "id": 1778001352782,
+    "source": "https://github.com/plesk/node-hello-world",
+    "status": "failed",
+    "error": "#0 building with \"desktop-linux\" instance using docker driver\n\n#1 [internal] load build definition from Dockerfile\n#1 transferring dockerfile: 152B 0.0s done\n#1 DONE 0.1s\n\n#2 [internal] load metadata for docker.io/library/node:18-alpine\n#2 DONE 1.7s\n\n#3 [internal] load .dockerignore\n#3 transferring context: 2B done\n#3 DONE 0.0s\n\n#4 [1/5] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e\n#4 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done\n#4 DONE 0.0s\n\n#5 [internal] load build context\n#5 transferring context: 32.96kB 0.1s done\n#5 DONE 0.2s\n\n#6 [2/5] WORKDIR /app\n#6 CACHED\n\n#7 [3/5] COPY package*.json ./\n#7 DONE 0.0s\n\n#8 [4/5] RUN npm install\n#8 0.798 npm error code ENOENT\n#8 0.798 npm error syscall open\n#8 0.798 npm error path /app/package.json\n#8 0.799 npm error errno -2\n#8 0.799 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'\n#8 0.799 npm error enoent This is related to npm not being able to find a file.\n#8 0.799 npm error enoent\n#8 0.800 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-05T17_15_51_264Z-debug-0.log\n#8 ERROR: process \"/bin/sh -c npm install\" did not complete successfully: exit code: 254\n------\n > [4/5] RUN npm install:\n0.798 npm error code ENOENT\n0.798 npm error syscall open\n0.798 npm error path /app/package.json\n0.799 npm error errno -2\n0.799 npm error enoent Could not read package.json: Error: ENOENT: no such file or directory, open '/app/package.json'\n0.799 npm error enoent This is related to npm not being able to find a file.\n0.799 npm error enoent\n0.800 npm error A complete log of this run can be found in: /root/.npm/_logs/2026-05-05T17_15_51_264Z-debug-0.log\n------\nDockerfile:4\n--------------------\n   2 |     WORKDIR /app\n   3 |     COPY package*.json ./\n   4 | >>> RUN npm install\n   5 |     COPY . .\n   6 |     EXPOSE 3000\n--------------------\nERROR: failed to build: failed to solve: process \"/bin/sh -c npm install\" did not complete successfully: exit code: 254\n\nView build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/m3hn2b8mniovtmvt5zormmaag\n",
+    "duration": "7.6s",
+    "timestamp": "2026-05-05T17:15:52.782Z"
+  },
+  {
+    "id": 1778001167694,
+    "source": "https://github.com/begin-examples/node-hello-world",
+    "status": "success",
+    "containerId": "710f306079b9",
+    "url": "http://localhost:3001",
+    "duration": "71.6s",
+    "timestamp": "2026-05-05T17:12:47.694Z"
+  },
+  {
+    "id": 1778000661638,
+    "source": "https://github.com/begin-examples/node-hello-world",
+    "status": "success",
+    "containerId": "25ea33fc82b6",
+    "url": "http://localhost:3001",
+    "duration": "6.7s",
+    "timestamp": "2026-05-05T17:04:21.638Z"
+  },
+  {
+    "id": 1777999486285,
+    "source": "https://github.com/begin-examples/node-hello-world",
+    "status": "success",
+    "containerId": "45d556e85147",
+    "url": "http://localhost:3001",
+    "duration": "38.4s",
+    "timestamp": "2026-05-05T16:44:46.285Z"
+  },
+  {
+    "id": 1777999373919,
+    "source": "https://github.com/yeshwanthlm/nodejs-on-ec2",
+    "status": "success",
+    "containerId": "0e62a657d2e7",
+    "url": "http://localhost:3001",
+    "duration": "5.8s",
+    "timestamp": "2026-05-05T16:42:53.919Z"
+  },
+  {
+    "id": 1777999359685,
+    "source": "https://github.com/yeshwanthlm/nodejs-on-ec2",
+    "status": "success",
+    "containerId": "ea7314a0405d",
+    "url": "http://localhost:3001",
+    "duration": "5.6s",
+    "timestamp": "2026-05-05T16:42:39.685Z"
+  },
+  {
+    "id": 1777999318825,
+    "source": "https://github.com/tairov/sample-node-app",
+    "status": "success",
+    "containerId": "19e96cb8dd8a",
+    "url": "http://localhost:3001",
+    "duration": "5.9s",
+    "timestamp": "2026-05-05T16:41:58.825Z"
+  },
+  {
+    "id": 1777999096281,
+    "source": "https://github.com/yeshwanthlm/nodejs-on-ec2",
+    "status": "success",
+    "containerId": "0d53c16660a3",
+    "url": "http://localhost:3001",
+    "duration": "6.8s",
+    "timestamp": "2026-05-05T16:38:16.281Z"
+  },
+  {
+    "id": 1777998982487,
+    "source": "https://github.com/johnpapa/node-hello",
+    "status": "success",
+    "containerId": "1a52bcf81f9b",
+    "url": "http://localhost:3001",
+    "duration": "8.9s",
+    "timestamp": "2026-05-05T16:36:22.487Z"
+  },
+  {
+    "id": 1777998773989,
+    "source": "https://github.com/tairov/sample-node-app",
+    "status": "success",
+    "containerId": "a577019e4951",
+    "url": "http://localhost:3001",
+    "duration": "12.6s",
+    "timestamp": "2026-05-05T16:32:53.989Z"
+  },
+  {
+    "id": 1777998128815,
+    "source": "https://github.com/tairov/sample-node-app",
+    "status": "success",
+    "containerId": "0d6b7f08c4b3",
+    "url": "http://localhost:3001",
+    "duration": "29.4s",
+    "timestamp": "2026-05-05T16:22:08.816Z"
+  },
+  {
+    "id": 1777997543407,
+    "source": "https://github.com/heroku/node-js-getting-started",
+    "status": "success",
+    "containerId": "8606ff0f1c89",
+    "url": "http://localhost:3001",
+    "duration": "11.7s",
+    "timestamp": "2026-05-05T16:12:23.407Z"
+  },
+  {
+    "id": 1777997432110,
+    "source": "https://github.com/heroku/node-js-getting-started",
+    "status": "success",
+    "containerId": "183dfde78031",
+    "url": "http://localhost:3001",
+    "duration": "9.4s",
+    "timestamp": "2026-05-05T16:10:32.110Z"
+  },
+  {
+    "id": 1777997401502,
+    "source": "https://github.com/heroku/node-js-getting-started",
+    "status": "success",
+    "containerId": "892de199824e",
+    "url": "http://localhost:3001",
+    "duration": "15.2s",
+    "timestamp": "2026-05-05T16:10:01.502Z"
+  },
+  {
+    "id": 1777997031480,
+    "source": "https://github.com/heroku/node-js-getting-started",
+    "status": "success",
+    "containerId": "e43aaf5c9352",
+    "url": "http://localhost:3001",
+    "duration": "20.3s",
+    "timestamp": "2026-05-05T16:03:51.480Z"
+  },
+  {
+    "id": 1777996186040,
+    "source": "user-app (built-in)",
+    "status": "success",
+    "containerId": "a7e5ecda8ded",
+    "url": "http://localhost:3001",
+    "duration": "17.0s",
+    "timestamp": "2026-05-05T15:49:46.040Z"
+  }
+]
